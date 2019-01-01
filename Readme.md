@@ -1,0 +1,3 @@
+一个层叠的LayoutManager
+
+支持简易的拖动

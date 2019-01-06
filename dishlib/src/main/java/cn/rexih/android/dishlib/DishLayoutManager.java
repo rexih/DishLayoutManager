@@ -90,19 +90,19 @@ public class DishLayoutManager extends RecyclerView.LayoutManager {
 
     }
 
-//    @Override
-//    public boolean canScrollHorizontally() {
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean canScrollVertically() {
-//        return false;
-//    }
-//
-//    @Override
-//    public int scrollHorizontallyBy(int dx, RecyclerView.Recycler recycler, RecyclerView.State state) {
-//        return super.scrollHorizontallyBy(dx, recycler, state);
-//
-//    }
+    @Override
+    public boolean canScrollHorizontally() {
+        return true;
+    }
+
+    @Override
+    public boolean canScrollVertically() {
+        return false;
+    }
+
+    @Override
+    public int scrollHorizontallyBy(int dx, RecyclerView.Recycler recycler, RecyclerView.State state) {
+        System.out.println(">>>>>>>>>>>>>>dx:"+dx);
+        return super.scrollHorizontallyBy(dx, recycler, state);
+    }
 }

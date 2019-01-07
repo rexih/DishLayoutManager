@@ -24,7 +24,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_main_scroll"/>
 
-    <android.support.v7.widget.RecyclerView
+    <cn.rexih.android.dishlib.RecyclerBanner
             android:id="@+id/rv_main_content"
             android:layout_width="0dp"
             android:layout_marginTop="20dp"
@@ -35,6 +35,6 @@
             android:layout_marginRight="8dp" android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent">
 
-    </android.support.v7.widget.RecyclerView>
+    </cn.rexih.android.dishlib.RecyclerBanner>
 
 </android.support.constraint.ConstraintLayout>

@@ -20,6 +20,8 @@ class MainActivity : AppCompatActivity() {
         layoutManager = FixedDishLayoutManager(this)
         rv_main_content.layoutManager = layoutManager
         rv_main_content.adapter = dishAdapter
+        rv_main_content.setInitPosition(5*1000)
+//        rv_main_content.isLoopEnabled
 
 //        TouchHelperCallback(rv_main_content,dishAdapter)
 
@@ -32,6 +34,8 @@ class MainActivity : AppCompatActivity() {
                 R.mipmap.img_dish_5
             )
 
+            rv_main_content.setInitPosition(list.size*1000)
+            layoutManager?.updateToInitPosition(list.size*1000)
             dishAdapter?.set(list)
 
 //            dishAdapter?._dataSet = list as ArrayList<Int>

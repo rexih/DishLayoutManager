@@ -2,13 +2,14 @@ package cn.rexih.android.dishlayoutmanager
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import cn.rexih.android.dishlib.FixedDishLayoutManager
+import android.view.View
+import cn.rexih.android.dishlib.FixedDishLayoutManager3
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private var dishAdapter: FixedDishAdapter? = null
-    private var layoutManager: FixedDishLayoutManager? = null
+    private var layoutManager: FixedDishLayoutManager3? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         dishAdapter = FixedDishAdapter(this)
 //        rv_main_content.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 //        rv_main_content.layoutManager = DishLayoutManager(this,3)
-        layoutManager = FixedDishLayoutManager(this)
+        layoutManager = FixedDishLayoutManager3(this)
         rv_main_content.layoutManager = layoutManager
         rv_main_content.adapter = dishAdapter
         rv_main_content.setInitPosition(5*1000)
@@ -45,6 +46,17 @@ class MainActivity : AppCompatActivity() {
 //            rv_main_content.scrollToPosition(1)
             layoutManager?.updateToInitPosition(40001)
         }
+        btn_main_show_margin.setOnClickListener {
+            isShow = !isShow
+            if (isShow) {
+                v_main_margin.visibility= View.VISIBLE
+            }else{
+                v_main_margin.visibility= View.GONE
+
+            }
+        }
 
     }
+
+    private var isShow:Boolean = false
 }

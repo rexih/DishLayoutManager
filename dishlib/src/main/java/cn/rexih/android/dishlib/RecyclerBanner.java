@@ -208,7 +208,7 @@ public class RecyclerBanner extends RecyclerView {
     }
 
     private static Flowable<Long> timerFlowable = Flowable
-            .interval(3, 3, TimeUnit.SECONDS)
+            .interval(4, 4, TimeUnit.SECONDS)
             .onBackpressureLatest()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread());
@@ -241,6 +241,12 @@ public class RecyclerBanner extends RecyclerView {
         LayoutManager layoutManager = getLayoutManager();
         if (layoutManager instanceof FixedDishLayoutManager) {
             FixedDishLayoutManager lm = (FixedDishLayoutManager) layoutManager;
+            lm.updateToInitPosition(currentIndex);
+        } else if (layoutManager instanceof FixedDishLayoutManager2) {
+            FixedDishLayoutManager2 lm = (FixedDishLayoutManager2) layoutManager;
+            lm.updateToInitPosition(currentIndex);
+        } else if (layoutManager instanceof FixedDishLayoutManager3) {
+            FixedDishLayoutManager3 lm = (FixedDishLayoutManager3) layoutManager;
             lm.updateToInitPosition(currentIndex);
         } else {
             this.scrollToPosition(currentIndex);

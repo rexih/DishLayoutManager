@@ -54,6 +54,16 @@ public class FixedDishLayoutManager3 extends RecyclerView.LayoutManager {
         requestLayout();
     }
 
+    public void scrollToNext(){
+        int currentPosition = 0;
+        if (mTotalOffset >= 0) {
+            currentPosition = mTotalOffset / halfItemWidth + initPosition;
+        } else {
+            currentPosition = (int) Math.floor(mTotalOffset * 1.0f / halfItemWidth) + initPosition;
+        }
+        scrollToPosition(++currentPosition);
+    }
+
     @Override
     public void scrollToPosition(int position) {
         super.scrollToPosition(position);

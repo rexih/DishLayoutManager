@@ -161,7 +161,17 @@ public class RecyclerBanner extends RecyclerView {
 //                    LogHelper.w(TAG, "定时器：" + aLong);
                     int count = getAdapter().getItemCount();
                     if (1 < count) { // 多于1个，才循环
-                        RecyclerBanner.this.scrollToPosition(++currentIndex);
+
+
+
+                        LayoutManager layoutManager = getLayoutManager();
+                        if (layoutManager instanceof FixedDishLayoutManager3) {
+                            FixedDishLayoutManager3 lm = (FixedDishLayoutManager3) layoutManager;
+                            lm.scrollToNext();
+                        } else {
+                            RecyclerBanner.this.scrollToPosition(++currentIndex);
+                        }
+
                     }
                 }
 

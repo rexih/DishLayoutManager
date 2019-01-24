@@ -54,7 +54,7 @@ public class FixedDishLayoutManager3 extends RecyclerView.LayoutManager {
         requestLayout();
     }
 
-    public void scrollToNext(){
+    public void scrollToNext() {
         int currentPosition = 0;
         if (mTotalOffset >= 0) {
             currentPosition = mTotalOffset / halfItemWidth + initPosition;
@@ -64,7 +64,7 @@ public class FixedDishLayoutManager3 extends RecyclerView.LayoutManager {
         scrollToPosition(++currentPosition);
     }
 
-    public void fixScroll(){
+    public void fixScroll() {
         int offset;
         int currentPosition;
         if (mTotalOffset >= 0) {
@@ -79,9 +79,9 @@ public class FixedDishLayoutManager3 extends RecyclerView.LayoutManager {
         }
 
 
-        if (offset>halfItemWidth/2){
+        if (offset > halfItemWidth / 2) {
             scrollToPosition(++currentPosition);
-        }else {
+        } else {
             scrollToPosition(currentPosition);
         }
     }
@@ -171,7 +171,7 @@ public class FixedDishLayoutManager3 extends RecyclerView.LayoutManager {
         //dx = oldX- newX => 右滑<0;左滑>0
 //        int newDx = (int) (dx * 0.999999);
 //        System.out.println(dx+":>>>>>>>>>:"+newDx);
-        System.out.println(dx+":>>>>>>>>>:"+state.getRemainingScrollHorizontal()+":tar:"+state.getTargetScrollPosition());
+//        System.out.println(dx + ":>>>>>>>>>:" + state.getRemainingScrollHorizontal() + ":tar:" + state.getTargetScrollPosition());
 
         int newDx = dx;
         fill(recycler, -newDx);
@@ -197,7 +197,8 @@ public class FixedDishLayoutManager3 extends RecyclerView.LayoutManager {
             currentPosition = (int) Math.floor(mTotalOffset * 1.0f / halfItemWidth) + initPosition;
             startPosition = currentPosition;
             endPosition = startPosition + oneScreenItemCount;
-            offset = mTotalOffset % halfItemWidth + halfItemWidth;
+            // 再计算一次模，防止正好模为0多走一段的情况
+            offset = (mTotalOffset % halfItemWidth + halfItemWidth) % halfItemWidth;
 
         }
 
@@ -236,9 +237,9 @@ public class FixedDishLayoutManager3 extends RecyclerView.LayoutManager {
         View viewForPosition = recycler.getViewForPosition(j);
         addView(viewForPosition);
         measureChildWithMargins(viewForPosition, 0, 0);
-        float factor = 1 - 0.6f *(halfItemWidth - offset)/halfItemWidth * (j - startPosition);
+        float factor = 1 - 0.6f * (halfItemWidth - offset) / halfItemWidth * (j - startPosition);
         factor = factor > 0 ? factor : 0;
-        int left = screenWidth - rightMargin - itemWidth - (j - startPosition) * halfItemWidth + (int)(offset*factor);
+        int left = screenWidth - rightMargin - itemWidth - (j - startPosition) * halfItemWidth + (int) (offset * factor);
         int top = 0;
         int right = left + getDecoratedMeasuredWidth(viewForPosition);
         int bottom = top + getDecoratedMeasuredHeight(viewForPosition);

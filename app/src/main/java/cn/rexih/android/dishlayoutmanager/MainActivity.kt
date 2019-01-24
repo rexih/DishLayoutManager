@@ -22,6 +22,24 @@ class MainActivity : AppCompatActivity() {
         rv_main_content.layoutManager = layoutManager
         rv_main_content.adapter = dishAdapter
         rv_main_content.setInitPosition(5*1000)
+//        rv_main_content.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+//
+//
+//
+//            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+//                super.onScrollStateChanged(recyclerView, newState)
+//
+//                when(newState){
+//                    android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE -> {
+//                        println("SCROLL_STATE_IDLE")
+//                        layoutManager!!.fixScroll()
+//                    }
+//                    android.support.v7.widget.RecyclerView.SCROLL_STATE_DRAGGING -> println("SCROLL_STATE_DRAGGING")
+//                    android.support.v7.widget.RecyclerView.SCROLL_STATE_SETTLING -> println("SCROLL_STATE_SETTLING")
+//                }
+//
+//            }
+//        })
 //        rv_main_content.isLoopEnabled
 
 //        TouchHelperCallback(rv_main_content,dishAdapter)

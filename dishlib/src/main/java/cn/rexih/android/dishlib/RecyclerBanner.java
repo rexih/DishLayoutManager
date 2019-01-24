@@ -1,6 +1,7 @@
 package cn.rexih.android.dishlib;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -26,7 +27,7 @@ import java.util.concurrent.TimeUnit;
  * @since 3.8.2
  */
 
-public class RecyclerBanner extends RecyclerView {
+public class RecyclerBanner extends RecyclerView{
     private static final String TAG = "RecyclerBanner";
     private Subscription                     subscription;
     private IndicatorListener indicator;
@@ -44,7 +45,18 @@ public class RecyclerBanner extends RecyclerView {
     }
     public RecyclerBanner(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-
+        addOnScrollListener(new OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (RecyclerView.SCROLL_STATE_IDLE == newState) {
+                    LayoutManager layoutManager = getLayoutManager();
+                    if (layoutManager instanceof FixedDishLayoutManager3) {
+                        ((FixedDishLayoutManager3) layoutManager).fixScroll();
+                    }
+                }
+            }
+        });
 //        new PagerSnapHelper().attachToRecyclerView(this);
 //        this.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager
 //                .HORIZONTAL, false));

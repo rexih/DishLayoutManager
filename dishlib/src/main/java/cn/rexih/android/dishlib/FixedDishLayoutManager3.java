@@ -64,12 +64,31 @@ public class FixedDishLayoutManager3 extends RecyclerView.LayoutManager {
         scrollToPosition(++currentPosition);
     }
 
+    public void fixScroll(){
+        int offset;
+        int currentPosition;
+        if (mTotalOffset >= 0) {
+            currentPosition = mTotalOffset / halfItemWidth + initPosition;
+            offset = mTotalOffset % halfItemWidth;
+
+
+        } else {
+            currentPosition = (int) Math.floor(mTotalOffset * 1.0f / halfItemWidth) + initPosition;
+            offset = mTotalOffset % halfItemWidth + halfItemWidth;
+
+        }
+
+
+        if (offset>halfItemWidth/2){
+            scrollToPosition(++currentPosition);
+        }else {
+            scrollToPosition(currentPosition);
+        }
+    }
+
     @Override
     public void scrollToPosition(int position) {
         super.scrollToPosition(position);
-        //TODO
-//        int currrentPosition = mTotalOffset / halfItemWidth + initPosition;
-//        int distance = (position-currrentPosition)*halfItemWidth;
         int distance = (position - initPosition) * halfItemWidth - mTotalOffset;
         brewAndStartAnimator(300, distance);
 
@@ -150,8 +169,13 @@ public class FixedDishLayoutManager3 extends RecyclerView.LayoutManager {
     @Override
     public int scrollHorizontallyBy(int dx, RecyclerView.Recycler recycler, RecyclerView.State state) {
         //dx = oldX- newX => 右滑<0;左滑>0
-        fill(recycler, -dx);
-        return dx;
+//        int newDx = (int) (dx * 0.999999);
+//        System.out.println(dx+":>>>>>>>>>:"+newDx);
+        System.out.println(dx+":>>>>>>>>>:"+state.getRemainingScrollHorizontal()+":tar:"+state.getTargetScrollPosition());
+
+        int newDx = dx;
+        fill(recycler, -newDx);
+        return newDx;
     }
 
     public int fill(RecyclerView.Recycler recycler, int dxReverse) {
@@ -212,7 +236,7 @@ public class FixedDishLayoutManager3 extends RecyclerView.LayoutManager {
         View viewForPosition = recycler.getViewForPosition(j);
         addView(viewForPosition);
         measureChildWithMargins(viewForPosition, 0, 0);
-        float factor = 1 - 0.2f * (j - startPosition);
+        float factor = 1 - 0.6f *(halfItemWidth - offset)/halfItemWidth * (j - startPosition);
         factor = factor > 0 ? factor : 0;
         int left = screenWidth - rightMargin - itemWidth - (j - startPosition) * halfItemWidth + (int)(offset*factor);
         int top = 0;
